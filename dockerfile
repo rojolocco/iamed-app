@@ -26,9 +26,9 @@ RUN pip install -r requirements.txt
 # RUN export FILENAME='all_models.zip'
 RUN wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget \
     --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies \
-    --no-check-certificate 'https://docs.google.com/uc?export=download&id=1BzhbILTXA0YgEu6NlNsE3cF4_n7KMNWm' \
-    -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1BzhbILTXA0YgEu6NlNsE3cF4_n7KMNWm" \
-    -O one_model.zip && rm -rf /tmp/cookies.txt
+    --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Rx5crF94lJUaPVL6RAXy9dM8Grpw1yCX' \
+    -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1Rx5crF94lJUaPVL6RAXy9dM8Grpw1yCX" \
+    -O all_models.zip && rm -rf /tmp/cookies.txt
 
 RUN unzip one_model.zip -d /app/app/all_models/chestXray
 
