@@ -1,0 +1,60 @@
+{% extends "/home/base_home.html" %}
+
+{% block title %}IA.Med 404 Page{% endblock %}
+
+<!-- ################################################################################### -->
+<!-- Navigation-->
+{% block nav %}
+<a class="navbar-brand js-scroll-trigger" href="{{ url_for('index') }}">IA.Med</a>
+<!--
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    Menu
+    <i class="fas fa-bars"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#download">Descargar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#features">Características</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
+        </li>
+
+        <li class="nav-item" id="login">
+            <a class="nav-link js-scroll-trigger" href="{{ url_for('login_home') }}">LogIn</a>
+        </li>
+    </ul>
+</div>-->
+{% endblock %}
+<!-- ################################################################################### -->
+<!-- Navigation-->
+
+
+{% block body %}
+<!-- ################################################################################### -->
+<!-- Header-->
+<header class="masthead" id="loginmasterhead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-5 my-auto">
+                <div class="header-content mx-auto">
+                    <img src="/static/home/img/Asset.png" alt="IA.Med" style="width:88%">
+                    <h1 class="mb-5">Ingresa y disfruta de la nueva generación de WebApps en
+                        <span id='indispensable'>MEDICINA!</span></h1>
+                </div>
+            </div>
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto text-center">
+                    <h1 class="mb-5">PAGINA NO ENCONTRADA</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ################################################################################### -->
+<!-- Header-->
+{% endblock %}

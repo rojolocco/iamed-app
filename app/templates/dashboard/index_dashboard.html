@@ -1,0 +1,86 @@
+{% extends '/dashboard/base_dashboard.html' %}
+
+<title>{% block title %}IA.Med Home Dashboard Page{% endblock %}</title>
+
+{% block container %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-5 align-self-center">
+            <h4 class="page-title">Inicio</h4>
+        </div>
+        <div class="col-7 align-self-center">
+            <div class="d-flex align-items-center justify-content-end">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#">IA.Med</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Dashboard Index -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <h1>BIENVENIDO A IA.Med!</h1>
+            </div>
+            <div>
+                <img class="mx-auto d-block" src="static/dashboard/images/welcome_6.jpg" alt="IA.Med Logo"
+                    style="width: 69%;padding-top: 15px;" />
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+            <h1>¿QUE ES IA.Med?</h1>
+            <p style="font-size:150%;" class="text-justify"> IA.Med es una plataforma tecnológica cuya principal función es servir como
+            herramienta para la toma de decisiones en diagnósticos médicos. Con ayuda de herramientas de Inteligencia 
+            Artificial, IA.Med puede hacer predicciones en medicina para el diagnóstico temprano de diversas patologías 
+            médicas. Estas predicciones se hacen en mucho menor tiempo y con grados de precisión y exactitud comparable 
+            a los mejores profesionales del sector salud.</p>
+            <div class="container-fluid py-4">
+                <img src="static/dashboard/images/welcome_8.jpg" alt="IA.Med Logo" style="width: 100%" />
+            </div>
+            <p style="font-size:150%;" class="pt-3"> Con la ayuda de IA.Med podrás:</p>
+            <ul style="font-size:150%;">
+                <li>
+                    Hacer diagnósticos tempranos con ayuda de imágenes biomédicas (e.g. Radiografías, Tomografías, ETC.)
+                </li>
+                <li>
+                    Consultar información relevante a las patologías que puede identificar cada una de las aplicaciones que hacen parte de
+                    IA.Med.
+                </li>
+                <li>
+                    Tener en una sola plataforma información relevante de diagnósticos médicos hechos con IA.Med para futuras consultas.
+                </li>
+                <li>
+                    Generar reportes sobre las consultas hechas para llevar un histórico personal y tener la posibilidad de adicionarlo a su
+                    historia médica.
+                </li>
+            </ul>
+            <h2 class="text-center pt-5">Bienvenido al futuro en <img src="static/home/img/apple-icon_2.png" alt="iamed"
+                    style="width: 5%">
+                <span style="color: rgb(107, 206, 7);">DIAGNÓSTICOS MEDICOS!</span> </h2>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Dashboard Index -->
+    <!-- ============================================================== -->
+
+</div>
+
+{% endblock %}

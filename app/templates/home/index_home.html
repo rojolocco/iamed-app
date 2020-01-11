@@ -1,0 +1,211 @@
+{% extends "/home/base_home.html" %}
+
+{% block title %}IA.Med Landing Page{% endblock %}
+
+<!-- ################################################################################### -->
+<!-- Navigation -->
+{% block nav %}
+<a class="navbar-brand js-scroll-trigger" href="#page-top">IA.Med</a>
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    Menu
+    <i class="fas fa-bars"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#download">Descargar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#features">Características</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contacto">Contacto</a>
+        </li>
+
+        <li class="nav-item" id="login">
+            <a class="nav-link js-scroll-trigger" href="{{ url_for('login_home') }}">LogIn</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+<!-- ################################################################################### -->
+<!-- Navigation -->
+
+
+{% block body %}
+<!-- ################################################################################### -->
+<!-- Header -->
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto">
+                    <h1 class="mb-5">En esta nueva era de la revolución 4.0, el uso de herramientas basadas en
+                        inteligencia
+                        artificial aplicadas al sector
+                        salud es <span id='indispensable'>INDISPENSABLE!</span></h1>
+                    <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Comienza Ahora!</a>
+                </div>
+            </div>
+            <div class="col-lg-5 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup iphone6_plus portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="static/home/img/demo-screen-1.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ################################################################################### -->
+<!-- Header -->
+
+<!-- ################################################################################### -->
+<!-- Download -->
+<section class="download bg-dark text-white text-center" id="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2 class="section-heading">Descubre de que se trata esta revolución!</h2>
+                <p>¡Nuestras aplicaciones están disponibles en cualquier dispositivo móvil! <br> ¡Descárgalas AHORA!</p>
+                <div class="badges">
+                    <a class="badge-link-g" href="https://play.google.com/store" target="_blank"><img
+                            src="static/home/img/google-play-badge.png" alt=""></a>
+                    <a class="badge-link-a" href="https://www.apple.com/co/ios/app-store/" target="_blank"><img
+                            src="static/home/img/app-store-badge.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ################################################################################### -->
+<!-- Download -->
+
+<!-- ################################################################################### -->
+<!-- Features -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Aplicaciones únicas, que salvan <span id="vidas">VIDAS</span>!</h2>
+            <!--<p class="text-muted">Mira lo que te ofrecemos!</p>-->
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup iphone6 portrait black">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="static/home/img/demo-screen-1.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 my-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-people text-primary"></i>
+                                <h3>Diagnósticos</h3>
+                                <p class="text-muted">Con ayuda de Inteligencia Artificial se hacen análisis preliminares con imágenes biomédicas.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-clock text-primary"></i>
+                                <h3>A tiempo</h3>
+                                <p class="text-muted">Estos diagnósticos son en tiempo real. ¡No es necesario esperar el
+                                    reporte médico!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-shuffle text-primary"></i>
+                                <h3>Decisiones</h3>
+                                <p class="text-muted">Con ayuda de IA.Med puedes tomar decisiones a tiempo, con precisión y exactitud!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-basket-loaded text-primary"></i>
+                                <h3>Planes y Servicios</h3>
+                                <p class="text-muted">Tenemos planes a la medida de todas las necesidades. <span
+                                        id="contactanos">Contáctanos!</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ################################################################################### -->
+<!-- Features -->
+
+<!-- ################################################################################### -->
+<!-- Contacto-->
+<section class="cta" id="contacto">
+    <div class="cta-content">
+        <div class="container">
+            <h2>Comienza tu ruta con nosotros!</h2>
+            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Contáctanos!</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
+<!-- ################################################################################### -->
+<!-- Contacto-->
+
+<!-- ################################################################################### -->
+<!-- Contact-->
+<section class="contact bg-dark text-white" id="contact">
+    <div class="container">
+        <h2>We
+            <i class="fas fa-heart"></i>
+            new friends!</h2>
+        <ul class="list-inline list-social">
+            <li class="list-inline-item social-facebook">
+                <a href="https://www.facebook.com/datapulseopt" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+            <li class="list-inline-item social-twitter">
+                <a href="https://twitter.com/DatapulseSas" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item social-linkedin">
+                <a href="https://www.linkedin.com/company/datapulsesas" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </li>         
+            <li class="list-inline-item social-instagram">
+                <a href="https://www.instagram.com/datapulse_opt" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li class="list-inline-item social-whatsapp">
+                <a href="https://api.whatsapp.com/send?phone=573172806443" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <p>info@datapulse-opt.com</p>
+    </div>
+</section>
+<!-- ################################################################################### -->
+<!-- Contact-->
+{% endblock %}

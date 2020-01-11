@@ -1,0 +1,185 @@
+{% extends '/dashboard/base_dashboard.html' %}
+
+<title>{% block title %}{% endblock %}</title>
+
+{% block container %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-5 align-self-center">
+            <h4 class="page-title">Patologías</h4>
+        </div>
+        <div class="col-7 align-self-center">
+            <div class="d-flex align-items-center justify-content-end">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Patologías</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Email campaign chart -->
+    <!-- ============================================================== -->
+    <h1 class="text-center">Patologías</h1>
+    <div class="col-md-8 offset-md-2">
+        <h4>En esta seccion se puede consultar informacion relativa sobre las patologías que las
+            aplicaciones diagnostican.
+        </h4>
+    </div>
+    <br>
+    <h2>ChestXray</h2>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                {% for k, v in findings1.items() %}
+                {% if  v['patologia'] == 'Atelectasia'%}
+                <button type="button" class="list-group-item list-group-item-action btn btn-success active"
+                    data-toggle="list" href="#{{ k }}" role="tab" style="font-size: 18px;">{{ v['patologia'] }}</button>
+                {% else %}
+                <button type="button" class="list-group-item list-group-item-action btn btn-success" data-toggle="list"
+                    href="#{{ k }}" role="tab" style="font-size: 18px;">{{ v['patologia'] }}</button>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="tab-content" id="nav-tabContent">
+                {% for k,v in findings1.items() %}
+                {% if v['patologia'] == 'Atelectasia' %}
+                <div class="tab-pane active" id="{{ k }}" role="tabpanel">
+                    <div class="card mb-3" style="max-width: 100%;">
+                        <div class="row  no-gutters">
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <h3 class="card-title font-weight-bold"><i class="mdi mdi-format-heart-pulse"></i> Descripción General</h3>
+                                    <p class="card-text text-justify">{{ v['Descripción General'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <img src="/static/dashboard/images/patologias/Atelectasia.jpg"  alt="Atelectasia" style="width: 100%; height: 50vh; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-format-list-numbers"></i> Sintomas</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Sintomas'][0] }}</p>
+                    <ul>
+                    {% for item_1 in v['Sintomas'][1:] %}
+                    <li>{{ item_1 }}</li>
+                    {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-heart-broken"></i> Causas</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Causas'] }}</p>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-alert-circle"></i> Factores de Riesgo</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Factores de Riesgo'][0] }}</p>
+                    <ul>
+                        {% for item_2 in v['Factores de Riesgo'][1:] %}
+                        <li>{{ item_2 }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-stethoscope"></i> Complicaciones</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Complicaciones'][0] }}</p>
+                    <ul>
+                        {% for item_3 in v['Complicaciones'][1:] %}
+                        <li>{{ item_3 }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-checkbox-multiple-marked"></i> Prevención</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Prevención'] }}</p>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-account-card-details"></i> Cuando debes consultar con un médico</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Cuando debes consultar con un médico'] }}</p>
+                </div>
+                {% else %}
+                <div class="tab-pane" id="{{ k }}" role="tabpanel">
+                    <div class="card mb-3" style="max-width: 100%;">
+                        <div class="row  no-gutters">
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <h3 class="card-title font-weight-bold"><i class="mdi mdi-format-heart-pulse"></i> Descripción General
+                                    </h3>
+                                    <p class="card-text text-justify">{{ v['Descripción General'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <img src="/static/dashboard/images/patologias/{{ v['patologia'] }}.jpg"  alt="{{ v['patologia'] }}"
+                                    style="width: 100%; height: 50vh; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-format-list-numbers"></i> Sintomas</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Sintomas'][0] }}</p>
+                    <ul>
+                        {% for item_1 in v['Sintomas'][1:] %}
+                        <li>{{ item_1 }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-heart-broken"></i> Causas</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Causas'] }}</p>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-alert-circle"></i> Factores de Riesgo</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Factores de Riesgo'][0] }}</p>
+                    <ul>
+                        {% for item_2 in v['Factores de Riesgo'][1:] %}
+                        <li>{{ item_2 }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-stethoscope"></i> Complicaciones</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Complicaciones'][0] }}</p>
+                    <ul>
+                        {% for item_3 in v['Complicaciones'][1:] %}
+                        <li>{{ item_3 }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-checkbox-multiple-marked"></i> Prevención</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Prevención'] }}</p>
+                    <br>
+                    <h3 class="font-weight-bold"><i class="mdi mdi-account-card-details"></i> Cuando debes consultar con un médico</h3>
+                    <p class="text-justify" style="font-size: 15px;">{{ v['Cuando debes consultar con un médico'] }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Email campaign chart -->
+    <!-- ============================================================== -->
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<style>
+    .card {
+        min-height: 250px;
+    }
+
+    .card-img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}
