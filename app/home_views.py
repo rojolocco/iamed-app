@@ -5,7 +5,7 @@ from app import app
 import requests
 import pyrebase
 
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect, url_for
 ######################################################################
 
 
@@ -23,6 +23,8 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
+db = firebase.database()
+storage = firebase.storage()
 ######################################################################
 
 
@@ -33,7 +35,42 @@ def index():
 ######################################################################
 
 
-# Pagina de Acceso - LogIn01##########################################
+# Pagina de Acceso - Register #########################################
+@app.route('/register_home', methods=['GET', 'POST'])
+def register_home():
+    unsuccessful = True
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        name = request.form['username']
+        try:
+            new_user = auth.create_user_with_email_and_password(email, password)
+            response = auth.sign_in_with_email_and_password(email, password)
+            id_user = response['localId']
+            if response['registered']:
+                session["USERNAME"] = id_user
+                data_user = {'userId': id_user,
+                            'nombre': name,
+                            'email': email,
+                            'tipo': 'nuevo',
+                            'avatar': 'nuevo.jpg',
+                            'consultas_xusar': 0,
+                            'consultas_totales': 0,
+                            'telefono': 'NA',
+                            'ciudad': 'NA',
+                            'profesion': 'NA',
+                            'especialidad': 'NA'
+                        }
+                #db.child("users").push(data_user)
+                db.child("users").child(response['localId']).set(data_user)
+                return redirect(url_for('dashboard')) #render_template('/dashboard/index_dashboard.html')
+        except requests.exceptions.HTTPError:
+            return render_template('/home/register_home.html', un=unsuccessful)
+    return render_template('/home/register_home.html')
+######################################################################
+
+
+# Pagina de Acceso - LogIn ###########################################
 @app.route('/login_home', methods=['GET', 'POST'])
 def login_home():
     unsuccessful = True
@@ -42,9 +79,10 @@ def login_home():
         password = request.form['password']
         try:
             response = auth.sign_in_with_email_and_password(email, password)
+            id_user = response['localId']
             if response['registered']:
-                session["USERNAME"] = email
-                return render_template('/dashboard/index_dashboard.html')
+                session["USERNAME"] = id_user
+                return redirect(url_for('dashboard')) #render_template('/dashboard/index_dashboard.html')
         except requests.exceptions.HTTPError:
             return render_template('/home/login_home.html', un=unsuccessful)
     return render_template('/home/login_home.html')

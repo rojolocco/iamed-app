@@ -2,9 +2,13 @@
 # Cargando librerias ##################################################
 from app import app
 from app.utils import findings1
+from app.home_views import db
 
 from flask import render_template, session
 #######################################################################
+
+
+all_users = db.child("users").get()
 
 
 # Pagina principal del Dashboard ######################################
@@ -64,9 +68,11 @@ def pay():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     entrar = True
+    id_user = session["USERNAME"]
+    data_user = all_users.val()[id_user]
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/profile_dashboard.html')
+        return render_template('/dashboard/profile_dashboard.html', data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -79,3 +85,4 @@ def logout():
     session.pop("USERNAME", None)
     return render_template('/home/index_home.html')
 #######################################################################
+# https://www.google.com/maps/embed/v1/place?key=AIzaSyDJbdeKppjFQ8WblXfYBYVPzFfVw6lFk0o&q=Bogota
