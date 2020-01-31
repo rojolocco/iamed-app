@@ -24,7 +24,7 @@ def dashboard():
 #######################################################################
 
 
-# Pagina principal de chestXray #######################################
+# Pagina principal de IA.Torax #######################################
 @app.route('/chestXray', methods=['GET', 'POST'])
 def chestXray():
     entrar = True
@@ -38,6 +38,20 @@ def chestXray():
 #######################################################################
 
 
+# Pagina principal de IA.Triage #######################################
+@app.route('/triage', methods=['GET', 'POST'])
+def triage():
+    entrar = True
+    main = True
+    if not session.get("USERNAME") is None:
+        print("Username found in session")
+        return render_template('/dashboard/triage_dashboard.html', main=main)
+    else:
+        print("No username found in session")
+        return render_template('/home/login_home.html', entrar=entrar)
+#######################################################################
+
+
 # Pagina principal de patologias #######################################
 @app.route('/patologias', methods=['GET', 'POST'])
 def patologias():
@@ -45,6 +59,19 @@ def patologias():
     if not session.get("USERNAME") is None:
         print("Username found in session")
         return render_template('/dashboard/patologias_dashboard.html', findings1=findings1)
+    else:
+        print("No username found in session")
+        return render_template('/home/login_home.html', entrar=entrar)
+#######################################################################
+
+
+# Pagina principal de pagos ##########################################
+@app.route('/reportes', methods=['GET', 'POST'])
+def reportes():
+    entrar = True
+    if not session.get("USERNAME") is None:
+        print("Username found in session")
+        return render_template('/dashboard/reportes_dashboard.html')
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
