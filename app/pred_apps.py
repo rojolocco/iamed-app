@@ -4,7 +4,7 @@ from app import db
 from app import settings
 from app.utils import allowed_image, tresholds, classes, patologies_preds
 from app.utils import base64_encode_image, check_image
-from app.utils import findings1
+from app.utils import findings1, pat_only, other_only
 
 import os
 import uuid
@@ -85,19 +85,46 @@ def chestXray_pred():
             for i in range(len(data['predictions'])):
                 outputs_list.append(data['predictions'][i]['probability'])
             print(outputs_list)
+            print(tresholds)    
+            
+            pred_list = []
+            for index, elem in enumerate(classes):
+                pred_list.append(outputs_list[index]/(2*tresholds[elem]))
+            print(pred_list)
 
-            pat_preds = patologies_preds(classes, tresholds, outputs_list)
+            def filterByKey(keys, pred_dict): 
+                return {x: pred_dict[x] for x in keys}
+            
+            pred_dict = dict(zip(classes, pred_list))
+            pat_dict = filterByKey(pat_only, pred_dict)
+            other_dict = filterByKey(other_only, pred_dict)
+            pred_tuple = sorted(
+                pat_dict.items(), key=lambda x: x[1], reverse=True)
+            print(pred_tuple)
+
+            pat_preds, war_preds = patologies_preds(classes, tresholds, outputs_list)
+            print(pat_preds)
 
             if len(pat_preds) == 0:
-                pat_preds = 'No se encontro nada.'
+                pat_preds = 'No indicios de patologias presentes.'
             else:
                 pat_preds = ', '.join(pat_preds)+'.'
+            
+            if 'Sin Hallazgo' in war_preds:
+                war_preds.remove('Sin Hallazgo')
+
+            if len(war_preds) == 0:
+                    war_preds = 'No indicios de patologias presentes.'
+            else:
+                war_preds = ', '.join(war_preds)+'.'
+
             print(f'\nPredicciones procesadas!\n')
 
             return render_template('/dashboard/chestXray_dashboard.html',
                                     outputs=outputs_list, filename=filename,
                                     classes=classes, pat_preds=pat_preds,
-                                    tresholds=tresholds)
+                                    war_preds=war_preds, tresholds=tresholds,
+                                    pred_tuple=pred_tuple, other_dict=other_dict)
 
             ############################################################
 

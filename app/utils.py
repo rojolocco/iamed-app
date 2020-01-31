@@ -56,16 +56,26 @@ classes = ['Sin Hallazgo', 'Cardiomediastino Agrandado', 'Cardiomegalia',
 all_columns = {'0': 'No Finding', '1': 'Enlarged Cardiomediastinum', '2': 'Cardiomegaly', '3': 'Lung Opacity', '4': 'Lung Lesion',
                 '5': 'Edema', '6': 'Consolidation', '7': 'Pneumonia', '8': 'Atelectasis', '9': 'Pneumothorax', '10': 'Pleural Effusion',
                 '11': 'Pleural Other', '12': 'Fracture', '13': 'Support Devices'}
+
+pat_only = ['Cardiomediastino Agrandado', 'Cardiomegalia',
+            'Opacidad Pulmonar', 'Lesión Pulmonar', 'Edema', 'Consolidación', 'Neumonía',
+            'Atelectasia', 'Neumotórax', 'Derrame Pleural', 'Otro Pleural',
+            'Fractura']
+
+other_only = ['Sin Hallazgo', 'Dispositivos de soporte']
 #######################################################################
 
 
 # Lista de Patologias ##########################################
 def patologies_preds(classes, tresholds, outputs):
     pat_list = []
+    war_list = []
     for idx, val in enumerate(classes):
         if outputs[idx] >= tresholds[val]:
             pat_list.append(val)
-    return pat_list
+        if (outputs[idx] >= 0.9*tresholds[val]) & (outputs[idx] < tresholds[val]):
+            war_list.append(val)
+    return pat_list, war_list
 #######################################################################
 
 
