@@ -64,7 +64,8 @@
                 <br/><br/>
                 {% if not main %}
                 <div class="text-justify" style="font-size:75%;">
-                    <h4>Aclaraciones</h4>
+                        <h4><img src="static/home/img/apple-icon_2.png" alt="iamed"
+                        style="width: 3%">  A tener en cuenta</h4>
                     <ol>
                         <li> 
                             Esta aplicación es una herramienta tecnológica basada en Inteligencia Artificial la cual proporciona 
@@ -119,10 +120,26 @@
                         style="width: 5%">
                     <span style="color: rgb(107, 206, 7);">DIAGNÓSTICOS CON RADIOGRAFÍAS DE TÓRAX!</span> </h2>
                 {% else %}
-                <h2 class="text-center py-2">POSIBLES PATOLOGIAS</h2>
-                <p style="font-size: 20px;">{{ pat_preds }}</p>
+                <h2 class="text-center py-2"><img src="static/home/img/apple-icon_2.png" alt="iamed"
+                        style="width: 5%">  POSIBLES PATOLOGIAS</h2>
+                {% if pad_preds == 'Sin Hallazgos'%}
+                <p style="font-size: 18px;">
+                Despues de un analisis detallado de la radiografia de torax, con ayuda del modelo de Machine learning, entrenado para
+                esta aplicacion, se determino que no hay indicios de patolgias presentes en la radiografia.
+                </p>
+                {% else %}
+                <p style="font-size: 18px;">
+                Despues de un analisis detallado de la radiografia de torax, con ayuda del modelo de Machine learning entrenado para
+                esta aplicacion, se determino que las siguientes patologias pueden estar presentes en una probabilidad mayor al 50%:
+                </p>
+                {% endif %}
+                <ul>
+                {% for i in pat_preds %}
+                <li style="font-size: 18px;">{{ i }}</li>
+                {% endfor %}
+                </ul>
                 <br/><hr><br/>
-                <h3 class="text-center pb-3">PROBABILIDADES DE OCURRENCIA</h3>
+                <h3 class="text-center pb-3"><i class="mdi mdi-desktop-mac"></i>  PROBABILIDADES DE OCURRENCIA</h3>
                 {% for i in pred_tuple %}
                 <div class="row justify-content-around">
                     <div class="col-md-4">
@@ -146,9 +163,9 @@
                     {% endif %}
                     <div class="col-md-4">
                         <div class="progress pt-1" style="height: 25px;">
-                            <div class="progress-bar progress-bar-striped bg-{{ barcolor }} progress-bar-animated" 
+                            <div class="progress-bar  bg-{{ barcolor }} " 
                             role="progressbar" style="width: {{ 100*i[1] }}%" aria-valuenow="{{ 100*i[1] }}"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                                aria-valuemin="0" aria-valuemax="100">{{ (100*i[1] )|round(1) }}%</div>
                         </div>
                     </div>
                 </div>
@@ -178,45 +195,9 @@
                     </div>
                 </div>
                 {% endfor %}
-                <!--
-                {% for i in outputs %}
-                {% set umbral = tresholds[classes[loop.index - 1]] %}
-                <div class="row justify-content-around">
-                    <div class="col-md-4">
-                        <a href="{{ url_for('patologias') }}" class="pt-1" 
-                        style="font-size: 18px; color:black">{{ classes[loop.index - 1] }}</a>
-                    </div>
-                    <div class="col-md-3">
-                        <p class="pt-1" style="font-size: 15px;">Probabilidad: {{ (100*i/(2*umbral))|round(1) }}%</p>
-                    </div>
-                    {% if i/(2*umbral) <= 0.25 %}
-                    {% set barcolor = 'success' %}
-                    {% elif i/(2*umbral) <= 0.45 %}
-                    {% set barcolor = 'info' %}
-                    {% elif i/(2*umbral) <= 0.5 %}
-                    {% set barcolor = 'warning' %}
-                    {% elif i/(2*umbral) <= 0.6 %}
-                    {% set barcolor = 'danger' %}
-                    {% else %}
-                    {% set barcolor = 'dark' %}
-                    {% endif %}
-                    <div class="col-md-4">
-                        <div class="progress pt-1" style="height: 25px;">
-                            <div class="progress-bar progress-bar-striped bg-{{ barcolor }} progress-bar-animated" 
-                            role="progressbar" style="width: {{ 100*i/(2*umbral)}}%" aria-valuenow="{{ 100*i/(2*umbral) }}"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <!--
-                    <div class="col-md-2">
-                        <p class="pt-1" style="font-size: 15px;">Umbral: {{ (100*tresholds[classes[loop.index - 1]])|round(1) }}</p>
-                    </div>
-                    --
-                </div>
-                {% endfor %}
-                -->
+                
                 <br/><hr><br/>
-                <h3 class="text-center py-2">PATOLOGIAS A TENER EN CUENTA</h3>
+                <h3 class="text-center py-2"><i class="mdi mdi-alert-circle"></i>  PATOLOGIAS A TENER EN CUENTA</h3>
                 <p style="font-size: 20px;">{{ war_preds }}</p>
                 {% endif %}
                 </div>

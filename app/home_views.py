@@ -59,11 +59,13 @@ def register_home():
                             'telefono': 'NA',
                             'ciudad': 'NA',
                             'profesion': 'NA',
-                            'especialidad': 'NA'
+                            'especialidad': 'NA',
+                            'terminos':'True',
+                            'apps':'NA'
                         }
-                #db.child("users").push(data_user)
                 db.child("users").child(response['localId']).set(data_user)
-                return redirect(url_for('dashboard')) #render_template('/dashboard/index_dashboard.html')
+                session["USERDATA"] = db.child("users").get().val()[id_user]
+                return render_template('/dashboard/index_dashboard.html', data_user=data_user)
         except requests.exceptions.HTTPError:
             return render_template('/home/register_home.html', un=unsuccessful)
     return render_template('/home/register_home.html')
@@ -82,6 +84,7 @@ def login_home():
             id_user = response['localId']
             if response['registered']:
                 session["USERNAME"] = id_user
+                session["USERDATA"] = db.child("users").get().val()[id_user]
                 return redirect(url_for('dashboard')) #render_template('/dashboard/index_dashboard.html')
         except requests.exceptions.HTTPError:
             return render_template('/home/login_home.html', un=unsuccessful)

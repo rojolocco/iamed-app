@@ -34,4 +34,5 @@ from app import dashboard_views
 from app import apis
 from app import pred_apps
 from app import error_handler
+from app import profile
 #######################################################################

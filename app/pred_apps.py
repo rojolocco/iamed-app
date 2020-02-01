@@ -105,33 +105,36 @@ def chestXray_pred():
             pat_preds, war_preds = patologies_preds(classes, tresholds, outputs_list)
             print(pat_preds)
 
-            if len(pat_preds) == 0:
-                pat_preds = 'No indicios de patologias presentes.'
-            else:
-                pat_preds = ', '.join(pat_preds)+'.'
+            #if len(pat_preds) == 0:
+            #    pat_preds = 'Sin Hallazgos'
+            #else:
+            #    pat_preds = ', '.join(pat_preds)+'.'
             
             if 'Sin Hallazgo' in war_preds:
                 war_preds.remove('Sin Hallazgo')
 
             if len(war_preds) == 0:
-                    war_preds = 'No indicios de patologias presentes.'
+                    war_preds = 'Sin Hallazgos'
             else:
                 war_preds = ', '.join(war_preds)+'.'
 
             print(f'\nPredicciones procesadas!\n')
+            data_user = session["USERDATA"]
 
             return render_template('/dashboard/chestXray_dashboard.html',
                                     outputs=outputs_list, filename=filename,
                                     classes=classes, pat_preds=pat_preds,
                                     war_preds=war_preds, tresholds=tresholds,
-                                    pred_tuple=pred_tuple, other_dict=other_dict)
+                                    pred_tuple=pred_tuple, other_dict=other_dict,
+                                    data_user=data_user)
 
             ############################################################
 
     main = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/chestXray_dashboard.html', main=main)
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/chestXray_dashboard.html', main=main, data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)

@@ -74,7 +74,22 @@
                         <div class="p-3 mb-2 bg-primary text-dark">Es necesario hacer el LogIn Primero.</div>
                         {% endif %}
                     </div>
-                    <button type="submit" class="btn btn-dark">Ingresar</button>
+                    <button type="submit" class="btn btn-warning" disabled id="registerButton">Registrarse</button>
+                    <div class="pt-3">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="checkbox"  onchange="document.getElementById('registerButton').disabled = !this.checked;"/>
+                            </div>
+                            <div class="col-11 text-justify">
+                                <p style="font-size:80%;"> Acepto los 
+                                <a <a href="#" data-toggle="modal" data-target="#terminosModal">Términos y Condiciones</a>. 
+                                Otorgo mi autorización para que mis datos personales puedan ser 
+                                recolectados y tratados con sujeción a la 
+                                <a href="#" data-toggle="modal" data-target="#privacidadModal">Politica de Privacidad</a> 
+                                de DATAPULSE S.A.S.</p>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

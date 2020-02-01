@@ -8,7 +8,8 @@ from flask import render_template, session
 #######################################################################
 
 
-all_users = db.child("users").get()
+#all_users = db.child("users").get()
+#print(all_users.val())
 
 
 # Pagina principal del Dashboard ######################################
@@ -17,7 +18,9 @@ def dashboard():
     entrar = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/index_dashboard.html')
+        data_user = session["USERDATA"]
+        print(data_user)
+        return render_template('/dashboard/index_dashboard.html', data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -31,7 +34,8 @@ def chestXray():
     main = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/chestXray_dashboard.html', main=main)
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/chestXray_dashboard.html', main=main, data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -45,7 +49,8 @@ def triage():
     main = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/triage_dashboard.html', main=main)
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/triage_dashboard.html', main=main, data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -58,7 +63,9 @@ def patologias():
     entrar = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/patologias_dashboard.html', findings1=findings1)
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/patologias_dashboard.html', 
+        findings1=findings1, data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -71,7 +78,8 @@ def reportes():
     entrar = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/reportes_dashboard.html')
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/reportes_dashboard.html', data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -84,7 +92,8 @@ def pay():
     entrar = True
     if not session.get("USERNAME") is None:
         print("Username found in session")
-        return render_template('/dashboard/pay_dashboard.html')
+        data_user = session["USERDATA"]
+        return render_template('/dashboard/pay_dashboard.html', data_user=data_user)
     else:
         print("No username found in session")
         return render_template('/home/login_home.html', entrar=entrar)
@@ -95,10 +104,9 @@ def pay():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     entrar = True
-    id_user = session["USERNAME"]
-    data_user = all_users.val()[id_user]
     if not session.get("USERNAME") is None:
         print("Username found in session")
+        data_user = session["USERDATA"]
         return render_template('/dashboard/profile_dashboard.html', data_user=data_user)
     else:
         print("No username found in session")
@@ -110,6 +118,6 @@ def profile():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.pop("USERNAME", None)
+    session.pop("USERDATA", None)
     return render_template('/home/index_home.html')
 #######################################################################
-# https://www.google.com/maps/embed/v1/place?key=AIzaSyDJbdeKppjFQ8WblXfYBYVPzFfVw6lFk0o&q=Bogota

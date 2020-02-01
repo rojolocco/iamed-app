@@ -159,6 +159,7 @@
                                 <span class="hide-menu">Inicio</span>
                             </a>
                         </li>
+                        {% if data_user['tipo'] == 'admin' %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url_for('chestXray') }}" 
                                 aria-expanded="false">
@@ -166,11 +167,17 @@
                                 <span class="hide-menu" style="color:rgb(0, 242, 0);">IA.Torax</span>
                             </a>
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url_for('triage') }}" 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link " 
+                            data-toggle="popover" title="IA.Triage" 
+                            data-content="Estamos en desarrollo de esta aplicación. Esta app permitira hacer prediciones
+                            de triage en unidades de emergencia en tiempo real. Contactanos para mas informacion!"
+                            href="#" 
                                 aria-expanded="false">
                                 <i class="mdi mdi-hospital-building"></i>
                                 <span class="hide-menu" style="color:rgb(0, 242, 0);">IA.Triage</span>
+                                <span class="badge badge-warning ml-2">Pronto!</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -187,6 +194,7 @@
                                 <span class="hide-menu" style="color:rgb(68, 194, 237);">Patologías</span>
                             </a>
                         </li>
+                        {% endif %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url_for('pay') }}"
                                 aria-expanded="false">
@@ -236,7 +244,7 @@
             <!-- ============================================================== -->
             <footer class="footer text-center">
                 Designed and Developed by
-                <a href="https://www.datapulse-opt.com" style="color: rgb(26, 168, 7);">DATAPULSE SAS</a>.
+                <a href="https://www.datapulse-opt.com" style="color: rgb(26, 168, 7);" target="_blank">DATAPULSE SAS</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
