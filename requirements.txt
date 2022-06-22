@@ -5,6 +5,6 @@ Pyrebase==3.0.27
 Pillow==6.2.1
 opencv-python==4.1.2.30
 pandas==0.25.3
-numpy==1.18.1
+numpy==1.22.0
 scikit-learn==0.21.3
 fastai==1.0.59
